@@ -125,6 +125,19 @@ proc report_flute_net { net } {
   stt::report_flute_tree $xs $ys $drvr_index
 }
 
+proc get_flute_net_wirelength { net } {
+  set pins [lassign $net net_name drvr_index]
+  set xs {}
+  set ys {}
+  foreach pin $pins {
+    lassign $pin pin_name x y
+    lappend xs $x
+    lappend ys $y
+  }
+  set result [stt::get_flute_tree_wirelength $xs $ys $drvr_index]
+  return $result
+}
+
 proc find_net { nets net_name } {
   foreach net $nets {
   set pins [lassign $net name drvr_index]

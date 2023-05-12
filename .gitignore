@@ -34,3 +34,5 @@ debug/
 
 coverage-output
 messages.txt
+*.txt
+*.nets

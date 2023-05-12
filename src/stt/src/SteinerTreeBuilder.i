@@ -98,6 +98,17 @@ void report_flute_tree(std::vector<int> x,
   stt::reportSteinerTree(tree, x[drvr_index], y[drvr_index], logger);
 }
 
+int
+get_flute_tree_wirelength(std::vector<int> x,
+                          std::vector<int> y,
+                          int drvr_index) 
+{
+  const int flute_accuracy = 18;
+  utl::Logger *logger = ord::getLogger();
+  stt::Tree tree = flt::flute(x, y, flute_accuracy);
+  return tree.length;
+}
+
 void
 report_pd_tree(std::vector<int> x,
                std::vector<int> y,
