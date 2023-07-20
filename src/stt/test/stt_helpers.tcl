@@ -125,7 +125,7 @@ proc report_flute_net { net } {
   stt::report_flute_tree $xs $ys $drvr_index
 }
 
-proc get_flute_net_wirelength { net } {
+proc get_flute_net_wirelength { net file_name } {
   set pins [lassign $net net_name drvr_index]
   set xs {}
   set ys {}
@@ -134,7 +134,7 @@ proc get_flute_net_wirelength { net } {
     lappend xs $x
     lappend ys $y
   }
-  set result [stt::get_flute_tree_wirelength $xs $ys $drvr_index]
+  set result [stt::get_flute_tree_wirelength $xs $ys $drvr_index 18 $file_name]
   return $result
 }
 

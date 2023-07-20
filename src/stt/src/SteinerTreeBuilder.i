@@ -42,6 +42,8 @@
 #include "ord/OpenRoad.hh"
 #include "odb/db.h"
 #include <vector>
+#include <fstream>
+#include <string>
 
 namespace ord {
 // Defined in OpenRoad.i
@@ -101,11 +103,14 @@ void report_flute_tree(std::vector<int> x,
 int
 get_flute_tree_wirelength(std::vector<int> x,
                           std::vector<int> y,
-                          int drvr_index) 
+                          int drvr_index,
+                          int flute_accuracy,
+                          const char* tree_file) 
 {
-  const int flute_accuracy = 18;
-  utl::Logger *logger = ord::getLogger();
+//   utl::Logger *logger = ord::getLogger();
+  std::ofstream os(tree_file);
   stt::Tree tree = flt::flute(x, y, flute_accuracy);
+  tree.printTree(os);
   return tree.length;
 }
 

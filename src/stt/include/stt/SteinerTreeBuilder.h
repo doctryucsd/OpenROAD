@@ -39,6 +39,7 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include <iostream>
 
 #include "utl/Logger.h"
 
@@ -74,6 +75,7 @@ struct Tree
   std::vector<Branch> branch;  // array of tree branches
 
   void printTree(utl::Logger* logger) const;
+  void printTree(std::ostream&) const;
   int branchCount() const { return branch.size(); }
 };
 

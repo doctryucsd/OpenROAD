@@ -7,7 +7,6 @@ import os
 
 def get_files(dir: str) -> List[str]:
     files: List[str] = os.listdir(dir)
-    files = sorted(files)
     files = [os.path.join(dir, file) for file in files]
 
     return files
@@ -31,7 +30,7 @@ def worker(file: str) -> List[Tuple[int, int]]:
     return points
 
 
-def get_point_sets(dir: str) -> List[List[Tuple[int, int]]]:
+def get_results(dir: str) -> List[List[Tuple[int, int]]]:
     files: List[str] = get_files(dir)
     with mp.Pool() as pool:
         point_sets: List[List[Tuple[int, int]]] = pool.map(worker, files)
@@ -47,11 +46,32 @@ def write_file(point_sets: List[List[Tuple[int, int]]], file_name: str) -> None:
             f.write("\n")
 
 
+def write_results(
+    results: List[Tuple[List[Tuple[int, int]], List[Tuple[int, int]]]],
+    files: List[str],
+    output_dir: str,
+) -> None:
+    if not os.path.exists(output_dir):
+        os.mkdir(output_dir)
+
+    for result, file in zip(results, files):
+        write_file(result, os.path.join(output_dir, file))
+
+
 def main() -> None:
-    dir_name: str = sys.argv[1]
-    output_name: str = sys.argv[2]
-    point_sets: List[List[Tuple[int, int]]] = get_point_sets(dir_name)
-    write_file(point_sets, output_name)
+    points_dir: str = sys.argv[1]
+    trees_dir: str = sys.argv[2]
+    output_dir: str = sys.argv[3]
+    
+    
+
+    results: List[Tuple[List[Tuple[int, int]], List[Tuple[int, int]]]] = get_results(
+        points_dir, trees_dir
+    )
+
+    # get tree file names
+
+    write_file(results, point_files, output_dir)
 
 
 if __name__ == "__main__":

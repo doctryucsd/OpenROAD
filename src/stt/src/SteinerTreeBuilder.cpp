@@ -434,4 +434,17 @@ void Tree::printTree(utl::Logger* logger) const
   }
 }
 
+void Tree::printTree(std::ostream& os) const {
+    if (deg > 1) {
+    for (int i = 0; i < deg; i++) {
+      os << (float) branch[i].x << " " << (float) branch[i].y
+         << " " << branch[i].n << "\n";
+    }
+    for (int i = deg; i < 2 * deg - 2; i++) {
+      os << (float) branch[i].x << " " << (float) branch[i].y
+         << " " << branch[i].n << "\n";
+    }
+  }
+}
+
 }  // namespace stt

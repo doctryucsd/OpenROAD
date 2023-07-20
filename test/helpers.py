@@ -2,6 +2,7 @@ import odb
 import os
 import utl
 
+
 def make_rect(design, xl, yl, xh, yh):
     xl = design.micronToDBU(xl)
     yl = design.micronToDBU(yl)
@@ -9,8 +10,9 @@ def make_rect(design, xl, yl, xh, yh):
     yh = design.micronToDBU(yh)
     return odb.Rect(xl, yl, xh, yh)
 
+
 def make_result_file(filename):
-    result_dir = os.path.join(os.getcwd(), 'results')
+    result_dir = os.path.join(os.getcwd(), "results")
     if not os.path.exists(result_dir):
         os.mkdir(result_dir)
 
@@ -18,11 +20,12 @@ def make_result_file(filename):
     filename = "{}-py{}".format(*root_ext)
     return os.path.join(result_dir, filename)
 
+
 def diff_files(file1, file2):
-    with open(file1, 'r') as f:
+    with open(file1, "r") as f:
         lines1 = f.readlines()
 
-    with open(file2, 'r') as f:
+    with open(file2, "r") as f:
         lines2 = f.readlines()
 
     num_lines1 = len(lines1)
@@ -40,6 +43,7 @@ def diff_files(file1, file2):
 
     print("No differences found.")
     return 0
+
 
 # Output voltage file is specified as ...
 utl.suppress_message(utl.PSM, 2)
