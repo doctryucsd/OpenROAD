@@ -1,4 +1,5 @@
-points=(50 100 200 500 800 1000 2000 5000)
+# points=(50 100 200 500 800 1000 2000 5000)
+points=(50)
 
 for i in "${!points[@]}"; do
     num=${points[$i]}
